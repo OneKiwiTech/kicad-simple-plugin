@@ -10,8 +10,11 @@ class Controller:
         self.view.notebook.AddPage(self.panel1, "Panel1")
         self.view.notebook.AddPage(self.panel2, "Panel2")
 
-        self.MoneyChanged(self.model.myMoney.get())
-        self.model.myMoney.addCallback(self.MoneyChanged)
+        self.DialogtoPanel1(self.model.status1.get())
+        self.model.status1.addCallback(self.DialogtoPanel1)
+
+        self.DialogtoPanel2(self.model.status2.get())
+        self.model.status2.addCallback(self.DialogtoPanel2)
 
         self.view.buttonSend1.Bind( wx.EVT_BUTTON, self.OnSend1Click )
         self.view.buttonGet1.Bind( wx.EVT_BUTTON, self.OnGet1Click )
@@ -34,14 +37,13 @@ class Controller:
 
     # DialogMain Events
     def OnSend1Click(self, event):
-        #self.view.textStatus.LabelText = 'OnSend1 z'
-        self.model.addMoney(10)
+        self.model.set_status1('from Dialog to Panel1')
 
     def OnGet1Click(self, event):
         self.view.textStatus.LabelText = 'OnGet1 x'
 
     def OnSend2Click(self, event):
-        self.view.textStatus.LabelText = 'OnSend2 c'
+        self.model.set_status2('from Dialog to Panel2')
 
     def OnGet2Click(self, event):
         self.view.textStatus.LabelText = 'OnGet2 v'
@@ -72,5 +74,8 @@ class Controller:
     def OnGetPanel2Click( self, event ):
         self.panel2.text2.LabelText = 'OnGetPanel2'
     
-    def MoneyChanged(self, money):
-        self.view.SetMoney(money)
+    def DialogtoPanel1(self, status):
+        self.panel1.SetText1(status)
+    
+    def DialogtoPanel2(self, status):
+        self.panel2.SetText2(status)

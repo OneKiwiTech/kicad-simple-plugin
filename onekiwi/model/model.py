@@ -2,10 +2,11 @@ from ..observable.observable import Observable
 
 class Model:
     def __init__(self):
-        self.myMoney = Observable(0)
+        self.status1 = Observable('')
+        self.status2 = Observable('')
 
-    def addMoney(self, value):
-        self.myMoney.set(self.myMoney.get() + value)
-        
-    def removeMoney(self, value):
-        self.myMoney.set(self.myMoney.get() - value)
+    def set_status1(self, value):
+        self.status1.set(value)
+    
+    def set_status2(self, value):
+        self.status2.set(value)
