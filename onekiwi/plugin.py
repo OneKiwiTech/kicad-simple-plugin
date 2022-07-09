@@ -17,8 +17,8 @@ class SimplePluginAction(pcbnew.ActionPlugin):
 		# The entry function of the plugin that is executed on user action
 		self.InitLogger()
 		self.logger = logging.getLogger(__name__)
-		frame = SimplePlugin()
-		frame.Show()
+		dialog = SimplePlugin()
+		dialog.Show()
 		pcbnew.UpdateUserInterface()
 
 	def InitLogger(self):

@@ -14,10 +14,10 @@ import wx.xrc
 ## Class SimplePluginFrame
 ###########################################################################
 
-class SimplePluginFrame ( wx.Frame ):
+class SimplePluginDialog ( wx.Dialog ):
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Simple Plugin", pos = wx.DefaultPosition, size = wx.Size( 320,240 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Simple Plugin", pos = wx.DefaultPosition, size = wx.Size( 320,240 ), style = wx.DEFAULT_DIALOG_STYLE )
 
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
@@ -41,7 +41,8 @@ class SimplePluginFrame ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.Bind( wx.EVT_SHOW, self.OnShow )
+		self.Bind( wx.EVT_CLOSE, self.OnDialogClose )
+		self.Bind( wx.EVT_SHOW, self.OnDialogShow )
 		self.button.Bind( wx.EVT_BUTTON, self.OnButtonPress )
 
 	def __del__( self ):
@@ -49,10 +50,11 @@ class SimplePluginFrame ( wx.Frame ):
 
 
 	# Virtual event handlers, override them in your derived class
-	def OnShow( self, event ):
+	def OnDialogClose( self, event ):
+		event.Skip()
+
+	def OnDialogShow( self, event ):
 		event.Skip()
 
 	def OnButtonPress( self, event ):
 		event.Skip()
-
-

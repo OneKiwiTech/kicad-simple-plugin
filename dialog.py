@@ -1,5 +1,5 @@
 import wx
-from SimplePlugin.simple_plugin_action import SimplePlugin
+from onekiwi.simple_plugin_action import SimplePlugin
 
 
 class SimplePluginApp(wx.App):

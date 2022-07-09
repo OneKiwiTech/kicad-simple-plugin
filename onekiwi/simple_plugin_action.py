@@ -1,19 +1,24 @@
 import logging
 import pcbnew
 import os
-from .simple_plugin_gui import SimplePluginFrame
+from .simple_plugin_gui import SimplePluginDialog
 
-class SimplePlugin(SimplePluginFrame):
+class SimplePlugin(SimplePluginDialog):
 
     def __init__(self):
         super(SimplePlugin, self).__init__(None)
     
-    def OnShow(self, event):
+    def OnDialogShow(self, event):
         file_name = pcbnew.GetBoard().GetFileName()
         base = os.path.basename(file_name)
         self.text.LabelText = base
-        logging.debug('init done')
+        logging.debug('dialog show')
 
+    def OnDialogClose(self, event):
+        logging.debug('dialog close')
+        self.Destroy()
+        #self.EndModal(0)
+        
     def OnButtonPress(self, event):
         logging.debug('button pressed')
         txt = self.edit.GetValue()
@@ -22,3 +27,5 @@ class SimplePlugin(SimplePluginFrame):
         else:
             self.text.LabelText = txt
             self.edit.SetValue('')
+
+    
